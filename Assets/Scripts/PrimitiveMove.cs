@@ -37,6 +37,9 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
             //and mapping the x input to x position
             //and the y input to z position 
             //(because we want it to move forward rather than up)
+
+            //transform.position will access the position of the transform component of the GameObject
+            //that this script is attached to
              transform.position += new Vector3(rawMove.x, 0f, rawMove.y);
         }
     }
