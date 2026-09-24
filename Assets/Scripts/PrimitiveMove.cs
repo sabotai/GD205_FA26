@@ -5,6 +5,9 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
 {
     InputAction moveAction; //create a new InputAction object called moveAction
     int bobsAge; //basic variable example
+    public Transform specialPos;
+    public Transform[] specialPositions;
+    public Transform teleportReceiver;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +36,9 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
         //because we only want it to move based on a new press and not from holding it down
         if (moveAction.WasPressedThisFrame()){ //it returns true if newly pressed
 
+
+
+
             //We offset the position by using +=
             //and mapping the x input to x position
             //and the y input to z position 
@@ -41,6 +47,21 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
             //transform.position will access the position of the transform component of the GameObject
             //that this script is attached to
              transform.position += new Vector3(rawMove.x, 0f, rawMove.y);
+             
+            for (int i = 0; i < specialPositions.Length; i++){
+
+            if (transform.position + new Vector3(0f, -1f, 0f) == specialPositions[i].position){
+
+                transform.position = teleportReceiver.position + new Vector3(0f, 1f, 0f);
+            }
+            }
+
+
+            if (transform.position + new Vector3(0f, -1f, 0f) == specialPos.position){
+                Debug.Log("BOOM");
+                //transform.position = new Vector3(0f, 1f, 0f);
+                transform.position = teleportReceiver.position + new Vector3(0f, 1f, 0f);
+            }
         }
     }
 }
