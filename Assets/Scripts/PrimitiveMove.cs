@@ -36,9 +36,6 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
         //because we only want it to move based on a new press and not from holding it down
         if (moveAction.WasPressedThisFrame()){ //it returns true if newly pressed
 
-
-
-
             //We offset the position by using +=
             //and mapping the x input to x position
             //and the y input to z position 
@@ -50,10 +47,14 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
              
             for (int i = 0; i < specialPositions.Length; i++){
 
-            if (transform.position + new Vector3(0f, -1f, 0f) == specialPositions[i].position){
+                if (transform.position + new Vector3(0f, -1f, 0f) == specialPositions[i].position){
 
-                transform.position = teleportReceiver.position + new Vector3(0f, 1f, 0f);
-            }
+                    transform.position = teleportReceiver.position + new Vector3(0f, 1f, 0f);
+                    if (specialPositions[i].gameObject.GetComponent<AudioSource>()){
+                        specialPositions[i].gameObject.GetComponent<AudioSource>().Play();
+                    }
+
+                }
             }
 
 
