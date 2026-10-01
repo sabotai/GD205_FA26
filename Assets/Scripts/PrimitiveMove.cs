@@ -44,12 +44,19 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
             //transform.position will access the position of the transform component of the GameObject
             //that this script is attached to
              transform.position += new Vector3(rawMove.x, 0f, rawMove.y);
-             
+            
+
+
+            //Check if the position of this transform (+ offset) is the same as EACH of the positions in our array
+
             for (int i = 0; i < specialPositions.Length; i++){
 
+                //If this position (+ offset) is the same as the position of this one in the array
                 if (transform.position + new Vector3(0f, -1f, 0f) == specialPositions[i].position){
 
                     transform.position = teleportReceiver.position + new Vector3(0f, 1f, 0f);
+
+                    //Play an AudioSource on this specialPosition if it has an AudioSource component
                     if (specialPositions[i].gameObject.GetComponent<AudioSource>()){
                         specialPositions[i].gameObject.GetComponent<AudioSource>().Play();
                     }
@@ -57,7 +64,7 @@ public class PrimitiveMove : MonoBehaviour //this incorporates the name we gave 
                 }
             }
 
-
+            //Check if the position of this transform (+ offset) is the same as our (single) specialPos
             if (transform.position + new Vector3(0f, -1f, 0f) == specialPos.position){
                 Debug.Log("BOOM");
                 //transform.position = new Vector3(0f, 1f, 0f);
